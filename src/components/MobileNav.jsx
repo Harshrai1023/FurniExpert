@@ -1,25 +1,26 @@
 import {
-    Bars3Icon,
-    BookmarkIcon,
-    ChevronRightIcon,
-    MagnifyingGlassIcon,
-    ShoppingCartIcon,
-    XMarkIcon,
+  Bars3Icon,
+  BookmarkIcon,
+  ChevronRightIcon,
+  MagnifyingGlassIcon,
+  ShoppingCartIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { PowerIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import {
-    Accordion,
-    AccordionBody,
-    AccordionHeader,
-    Card,
-    Drawer,
-    IconButton,
-    List,
-    ListItem,
-    ListItemPrefix,
-    Typography,
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  Card,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemPrefix,
+  Typography,
 } from "@material-tailwind/react";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default function MobileNav() {
   const [open, setOpen] = React.useState(0);
@@ -43,10 +44,12 @@ export default function MobileNav() {
           )}
         </IconButton>
         <div>
-          <IconButton variant="text" size="md" >
-            <ShoppingCartIcon className="h-6 w-6 stroke-2" />
-          </IconButton>
-          <IconButton variant="text" size="md" >
+          <NavLink to="/cart">
+            <IconButton variant="text" size="md">
+              <ShoppingCartIcon className="h-6 w-6 stroke-2" />
+            </IconButton>
+          </NavLink>
+          <IconButton variant="text" size="md">
             <MagnifyingGlassIcon className="h-6 w-6 stroke-2" />
           </IconButton>
         </div>
@@ -149,15 +152,15 @@ export default function MobileNav() {
               <AccordionBody className="py-1">
                 <List className="p-0">
                   <ListItem>
-                    <ListItemPrefix>
+                    {/* <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
+                    </ListItemPrefix> */}
                     Orders
                   </ListItem>
                   <ListItem>
-                    <ListItemPrefix>
+                    {/* <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
+                    </ListItemPrefix> */}
                     Products
                   </ListItem>
                 </List>
@@ -190,15 +193,15 @@ export default function MobileNav() {
               <AccordionBody className="py-1">
                 <List className="p-0">
                   <ListItem>
-                    <ListItemPrefix>
+                    {/* <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
+                    </ListItemPrefix> */}
                     Orders
                   </ListItem>
                   <ListItem>
-                    <ListItemPrefix>
+                    {/* <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
+                    </ListItemPrefix> */}
                     Products
                   </ListItem>
                 </List>
@@ -231,15 +234,15 @@ export default function MobileNav() {
               <AccordionBody className="py-1">
                 <List className="p-0">
                   <ListItem>
-                    <ListItemPrefix>
+                    {/* <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
+                    </ListItemPrefix> */}
                     Orders
                   </ListItem>
                   <ListItem>
-                    <ListItemPrefix>
+                    {/* <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
+                    </ListItemPrefix> */}
                     Products
                   </ListItem>
                 </List>
@@ -272,15 +275,15 @@ export default function MobileNav() {
               <AccordionBody className="py-1">
                 <List className="p-0">
                   <ListItem>
-                    <ListItemPrefix>
+                    {/* <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
+                    </ListItemPrefix> */}
                     Orders
                   </ListItem>
                   <ListItem>
-                    <ListItemPrefix>
+                    {/* <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
+                    </ListItemPrefix> */}
                     Products
                   </ListItem>
                 </List>
@@ -289,18 +292,22 @@ export default function MobileNav() {
 
             <hr className="my-2 border-blue-gray-50" />
 
-            <ListItem>
-              <ListItemPrefix>
-                <UserCircleIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Profile
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <BookmarkIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Wishlist
-            </ListItem>
+            <NavLink to="/profile" onClick={closeDrawer}>
+              <ListItem>
+                <ListItemPrefix>
+                  <UserCircleIcon className="h-5 w-5" />
+                </ListItemPrefix>
+                Profile
+              </ListItem>
+            </NavLink>
+            <NavLink to="/wishlist" onClick={closeDrawer}>
+              <ListItem>
+                <ListItemPrefix>
+                  <BookmarkIcon className="h-5 w-5" />
+                </ListItemPrefix>
+                Wishlist
+              </ListItem>
+            </NavLink>
             <ListItem>
               <ListItemPrefix>
                 <PowerIcon className="h-5 w-5" />
