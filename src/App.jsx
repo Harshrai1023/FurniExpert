@@ -19,6 +19,7 @@ export default function App() {
     "/cart",
     "/success",
     "/profile",
+    "/wishlist",
     "/products",
     "/product/:id",
     "/products/:category",

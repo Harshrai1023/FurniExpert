@@ -61,15 +61,20 @@ export default function MobileNav() {
           shadow={false}
           className="h-[calc(100vh-2rem)] w-full p-4"
         >
-          <div className="mb-2 flex items-center gap-4 p-4">
-            <img
-              src="https://docs.material-tailwind.com/img/logo-ct-dark.png"
-              alt="brand"
-              className="h-8 w-8"
-            />
-            <Typography variant="h5" color="blue-gray">
-              FurniExpert
-            </Typography>
+          <div className="flex items-center justify-between mb-2 p-4">
+            <NavLink to="/" onClick={closeDrawer}>
+              <div className="flex items-center gap-4 ">
+                <img
+                  src="https://docs.material-tailwind.com/img/logo-ct-dark.png"
+                  alt="brand"
+                  className="h-8 w-8"
+                />
+                <Typography variant="h5" color="blue-gray">
+                  FurniExpert
+                </Typography>
+              </div>
+            </NavLink>
+            <XMarkIcon className="h-6 w-6 stroke-2" onClick={closeDrawer}/>
           </div>
           {/* <div className="p-2">
             <Input
