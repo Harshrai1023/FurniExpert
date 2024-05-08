@@ -1,25 +1,10 @@
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { Button, IconButton, Typography } from "@material-tailwind/react";
 import React from "react";
+import { topProducts } from "../Data";
 
 export const HomePage = () => {
-  const topProducts = [
-    {
-      img: "/assets/images/product-1.png",
-      name: "Nordic Chair",
-      price: "50.00",
-    },
-    {
-      img: "/assets/images/product-2.png",
-      name: "Kruzo Aero Chair",
-      price: "78.00",
-    },
-    {
-      img: "/assets/images/product-3.png",
-      name: "Ergonomic Chair",
-      price: "43.00",
-    },
-  ];
+  
   return (
     <>
       <section className="mx-auto w-full max-w-7xl px-8 py-16">
