@@ -18,3 +18,6 @@ export const topProducts = [
     price: "43.00",
   },
 ];
+
+export const user = false;
+export const isAdmin = false; 
