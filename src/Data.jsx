@@ -20,4 +20,4 @@ export const topProducts = [
 ];
 
 export const user = false;
-export const isAdmin = false; 
+export const isAdmin = true; 

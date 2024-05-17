@@ -4,7 +4,7 @@ export default withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
-      primary: "#D6CE93",
+      primary:"#1b1f24",
       secondary: "#A3A380",
       accent: "#3B5D50",
       neutral: "#131318",
