@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 export const AddProductPage = () => {
   return (
-    <>
+    <div className="max-w-7xl mx-auto">
       <div className="grid md:grid-cols-8 ">
         <div className="col-span-2 hidden md:block">
           <Typography>Details</Typography>
@@ -51,6 +51,6 @@ export const AddProductPage = () => {
       <div className="flex justify-end p-5">
         <Button>Create Product</Button>
       </div>
-    </>
+    </div>
   );
 };

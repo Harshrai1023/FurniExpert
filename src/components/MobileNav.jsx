@@ -1,7 +1,7 @@
 import {
   Bars3Icon,
-  BookmarkIcon,
   ChevronRightIcon,
+  HeartIcon,
   MagnifyingGlassIcon,
   ShoppingCartIcon,
   XMarkIcon,
@@ -74,7 +74,7 @@ export default function MobileNav() {
                 </Typography>
               </div>
             </NavLink>
-            <XMarkIcon className="h-6 w-6 stroke-2" onClick={closeDrawer}/>
+            <XMarkIcon className="h-6 w-6 stroke-2" onClick={closeDrawer} />
           </div>
           {/* <div className="p-2">
             <Input
@@ -308,9 +308,9 @@ export default function MobileNav() {
             <NavLink to="/wishlist" onClick={closeDrawer}>
               <ListItem>
                 <ListItemPrefix>
-                  <BookmarkIcon className="h-5 w-5" />
+                  <HeartIcon className="h-5 w-5" />
                 </ListItemPrefix>
-                Wishlist
+                Favorites
               </ListItem>
             </NavLink>
             <ListItem>

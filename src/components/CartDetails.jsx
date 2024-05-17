@@ -162,7 +162,7 @@ export function CartDetails() {
                             color="blue-gray"
                             className="font-normal"
                           >
-                            ${amount}
+                            ₹{amount}
                           </Typography>
                         </td>
                         <td className={classes}>
@@ -180,7 +180,7 @@ export function CartDetails() {
                             color="blue-gray"
                             className="font-normal"
                           >
-                            ${totalPrice}
+                            ₹{totalPrice}
                           </Typography>
                         </td>
                         <td className={classes}>

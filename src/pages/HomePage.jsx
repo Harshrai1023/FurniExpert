@@ -46,7 +46,7 @@ export const HomePage = () => {
                 alt={product.name}
               />
               <Typography>{product.name}</Typography>
-              <Typography>${product.price}</Typography>
+              <Typography>₹{product.price}</Typography>
               <IconButton
                 className="rounded-full translate-y-3 invisible group-hover:visible"
                 variant="text"

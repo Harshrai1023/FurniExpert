@@ -12,7 +12,7 @@ export function CartPage() {
             <Typography>Order Summary</Typography>
             <div className="flex justify-between mt-2">
               <Typography>Sub Total</Typography>
-              <Typography>$97.14</Typography>
+              <Typography>₹97.14</Typography>
             </div>
             <div className="flex justify-between">
               <Typography>Discount</Typography>
@@ -26,7 +26,7 @@ export function CartPage() {
             <div className="flex justify-between">
               <Typography>Total</Typography>
               <div className="text-right">
-                <Typography>$97.14</Typography>
+                <Typography>₹97.14</Typography>
                 <Typography>(VAT included if applicable)</Typography>
               </div>
             </div>
