@@ -21,7 +21,7 @@ export default function CustomFooter() {
   const [email, setEmail] = React.useState("");
   const onChange = ({ target }) => setEmail(target.value);
   return (
-    <footer className="relative w-full">
+    <footer className="relative w-full lg:mt-20">
       <div className="mx-auto w-full max-w-7xl px-8">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
           <div className="text-center flex flex-col items-center justify-center md:items-start  md:text-left">
