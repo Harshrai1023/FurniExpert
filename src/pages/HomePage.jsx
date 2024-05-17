@@ -6,9 +6,9 @@ import { topProducts } from "../Data";
 
 export const HomePage = () => {
   return (
-    <div className="mx-auto w-full max-w-7xl px-8">
+    <div className="">
       {/* Hero Section */}
-      <section className="flex h-screen">
+      <section className="flex flex-col-reverse md:flex-row h-screen bg-secondary justify-center items-center">
         <div>
           <Typography>Discover the Latest Furniture Trends</Typography>
           <Typography>
@@ -17,13 +17,15 @@ export const HomePage = () => {
           <Button>Shop Now</Button>
           <Button>Explore</Button>
         </div>
-        <div>
-          <img src="/assets/images/couch.png" alt="" />
+        <div className="max-w-2xl relative">
+          <img className="z-10" src="/assets/images/couch.png" alt="" />
+          <img className="absolute top-0 right-0 z-0" src="/assets/images/dotted.png" alt="" />
+
         </div>
       </section>
 
       {/* Top Products */}
-      <section className="py-16">
+      <section className=" mx-auto w-full max-w-7xl px-8 py-16">
         <div className="grid grid-row-1 grid-cols-2 md:grid-cols-4 items-center justify-center">
           <div className="">
             <Typography>Crafted with excellent material.</Typography>
