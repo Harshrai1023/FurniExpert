@@ -1,4 +1,9 @@
-import { ChevronLeftIcon, TrashIcon } from "@heroicons/react/24/solid";
+import {
+  ChevronLeftIcon,
+  MinusIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 import {
   Button,
   Card,
@@ -8,82 +13,16 @@ import {
   Tooltip,
   Typography,
 } from "@material-tailwind/react";
-import React, { useState } from "react";
-import { QuantityButtons } from "../widgets/QuantityButtons";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { handleQuantityChange, removeProduct } from "../redux/cartRedux";
 
 const TABLE_HEAD = ["Product", "Price", "Quantity", "Total Price", ""];
 
-const initialCartItems = [
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-    name: "Spotify",
-    amount: 100,
-    date: "Wed 3:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-amazon.svg",
-    name: "Amazon",
-    amount: 200,
-    date: "Wed 1:00pm",
-    status: "paid",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-pinterest.svg",
-    name: "Pinterest",
-    amount: 300,
-    date: "Mon 7:40pm",
-    status: "pending",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-google.svg",
-    name: "Google",
-    amount: 50,
-    date: "Wed 5:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-netflix.svg",
-    name: "Netflix",
-    amount: 10,
-    date: "Wed 3:30am",
-    status: "cancelled",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-];
-
 export function CartDetails() {
-  const [cartItems, setCartItems] = useState(initialCartItems);
-  const [quantities, setQuantities] = useState(
-    Array(initialCartItems.length).fill(1)
-  );
-
-  const handleQuantityChange = (index, newQuantity) => {
-    const newQuantities = [...quantities];
-    newQuantities[index] = newQuantity;
-    setQuantities(newQuantities);
-  };
-
-  const handleRemoveItem = (index) => {
-    const newCartItems = cartItems.filter((_, i) => i !== index);
-    const newQuantities = quantities.filter((_, i) => i !== index);
-    setCartItems(newCartItems);
-    setQuantities(newQuantities);
-  };
+  const cartItems = useSelector((state) => state.cart.products);
+  const dispatch = useDispatch();
 
   return (
     <div className="mx-5 my-0 lg:mx-0 lg:my-5 col-span-6">
@@ -116,88 +55,99 @@ export function CartDetails() {
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map(
-                  (
-                    {
-                      img,
-                      name,
-                      amount,
-                      date,
-                      status,
-                      account,
-                      accountNumber,
-                      expiry,
-                    },
-                    index
-                  ) => {
-                    const isLast = index === cartItems.length - 1;
-                    const classes = isLast
-                      ? "p-4"
-                      : "p-4 border-b border-blue-gray-50";
-                    const quantity = quantities[index];
-                    const totalPrice = amount * quantity;
+                {cartItems.map((cartItem, index) => {
+                  const isLast = index === cartItems.length - 1;
+                  const classes = isLast
+                    ? "p-4"
+                    : "p-4 border-b border-blue-gray-50";
+                  const quantity = cartItem.quantity;
+                  const totalPrice = cartItem.price * quantity;
 
-                    return (
-                      <tr key={name}>
-                        <td className={classes}>
-                          <div className="flex items-center gap-3">
-                            <img
-                              src={img}
-                              alt={name}
-                              size="md"
-                              className="border w-12 h-12 rounded-lg  border-blue-gray-50 bg-blue-gray-50/50 object-contain "
-                            />
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-bold"
-                            >
-                              {name}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td className={classes}>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
-                          >
-                            ₹{amount}
-                          </Typography>
-                        </td>
-                        <td className={classes}>
-                          <QuantityButtons
-                            quantity={quantity}
-                            setQuantity={(newQuantity) =>
-                              handleQuantityChange(index, newQuantity)
-                            }
+                  return (
+                    <tr key={cartItem.id}>
+                      <td className={classes}>
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={cartItem.img}
+                            alt={cartItem.name}
+                            size="md"
+                            className="border w-12 h-12 rounded-lg  border-blue-gray-50 bg-blue-gray-50/50 object-contain "
                           />
-                        </td>
-
-                        <td className={classes}>
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
+                            className="font-bold"
                           >
-                            ₹{totalPrice}
+                            {cartItem.name}
                           </Typography>
-                        </td>
-                        <td className={classes}>
-                          <Tooltip content="Remove Product">
-                            <IconButton
-                              className="rounded-full"
-                              variant="text"
-                              onClick={() => handleRemoveItem(index)}
-                            >
-                              <TrashIcon className="h-4 w-4" />
-                            </IconButton>
-                          </Tooltip>
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
+                        </div>
+                      </td>
+                      <td className={classes}>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          ₹{cartItem.price}
+                        </Typography>
+                      </td>
+                      <td className={classes}>
+                        <div className="flex items-center border rounded-lg w-min p-1 gap-2">
+                          <IconButton
+                            className="rounded w-min h-min p-4"
+                            variant="text"
+                            onClick={() =>
+                              dispatch(
+                                handleQuantityChange({
+                                  id: cartItem.id,
+                                  op: "decrement",
+                                })
+                              )
+                            }
+                          >
+                            <MinusIcon className="h-4 w-4" />
+                          </IconButton>
+                          <Typography>{quantity}</Typography>
+                          <IconButton
+                            className="rounded w-min h-min p-4"
+                            variant="text"
+                            onClick={() =>
+                              dispatch(
+                                handleQuantityChange({
+                                  id: cartItem.id,
+                                  op: "increment",
+                                })
+                              )
+                            }
+                          >
+                            <PlusIcon className="h-4 w-4" />
+                          </IconButton>
+                        </div>
+                      </td>
+
+                      <td className={classes}>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          ₹{totalPrice}
+                        </Typography>
+                      </td>
+                      <td className={classes}>
+                        <Tooltip content="Remove Product">
+                          <IconButton
+                            className="rounded-full"
+                            variant="text"
+                            onClick={() => dispatch(removeProduct(cartItem.id))}
+                          >
+                            <TrashIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           ) : (
@@ -212,9 +162,11 @@ export function CartDetails() {
         </CardBody>
       </Card>
       <div className="pt-3">
-        <Button variant="text" className="flex items-center gap-2">
-          <ChevronLeftIcon className="h-4 w-4" /> Continue Shopping
-        </Button>
+        <NavLink to="/products">
+          <Button variant="text" className="flex items-center gap-2">
+            <ChevronLeftIcon className="h-4 w-4" /> Continue Shopping
+          </Button>
+        </NavLink>
       </div>
     </div>
   );

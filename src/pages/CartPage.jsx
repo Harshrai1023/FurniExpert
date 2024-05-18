@@ -1,6 +1,8 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
+import { useSelector } from "react-redux";
 import { CartDetails } from "../components/CartDetails";
 export function CartPage() {
+  const cart = useSelector((state) => state.cart)
   return (
     <div className=" max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-9">
       <CartDetails />
@@ -12,7 +14,7 @@ export function CartPage() {
             <Typography>Order Summary</Typography>
             <div className="flex justify-between mt-2">
               <Typography>Sub Total</Typography>
-              <Typography>₹97.14</Typography>
+              <Typography>₹{cart.total}</Typography>
             </div>
             <div className="flex justify-between">
               <Typography>Discount</Typography>
@@ -26,7 +28,7 @@ export function CartPage() {
             <div className="flex justify-between">
               <Typography>Total</Typography>
               <div className="text-right">
-                <Typography>₹97.14</Typography>
+                <Typography>₹{cart.total}</Typography>
                 <Typography>(VAT included if applicable)</Typography>
               </div>
             </div>

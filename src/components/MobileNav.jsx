@@ -20,9 +20,11 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 export default function MobileNav() {
+  const quantity = useSelector((state) => state.cart.products.length);
   const [open, setOpen] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
@@ -47,6 +49,13 @@ export default function MobileNav() {
           <NavLink to="/cart">
             <IconButton variant="text" size="md">
               <ShoppingCartIcon className="h-6 w-6 stroke-2" />
+              {quantity > 0 ? (
+                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs font-medium rounded-full px-1">
+                  {quantity}
+                </span>
+              ) : (
+                <span/>
+              )}
             </IconButton>
           </NavLink>
           <IconButton variant="text" size="md">
