@@ -1,7 +1,11 @@
 import { ThemeProvider } from "@material-tailwind/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+// import { PersistGate } from "redux-persist/integration/react";
+import store from "./redux/store";
+
 import App from "./App";
 import "./index.css";
 const theme = {
@@ -43,10 +47,14 @@ const theme = {
 };
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider value={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store}>
+      {/* <PersistGate> */}
+        <ThemeProvider value={theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      {/* </PersistGate> */}
+    </Provider>
   </React.StrictMode>
 );
