@@ -5,6 +5,7 @@ import {
   Textarea,
   Typography,
 } from "@material-tailwind/react";
+import ImageUpload from "../components/ImageUpload";
 export const AddProductPage = () => {
   return (
     <div className="max-w-7xl mx-auto">
@@ -19,7 +20,7 @@ export const AddProductPage = () => {
             <Typography variant="h5">Details</Typography>
             <Input label="Product Name" />
             <Textarea label="Description" />
-            <Typography>Images</Typography>
+            <ImageUpload />
           </div>
         </Card>
         <div className="col-span-2 hidden md:block">

@@ -36,7 +36,7 @@ export default function MobileNav() {
   const closeDrawer = () => setIsDrawerOpen(false);
 
   return (
-    <>
+    <div className="max-w-7xl mx-auto">
       <div className="flex justify-between p-2">
         <IconButton variant="text" size="md" onClick={openDrawer}>
           {isDrawerOpen ? (
@@ -364,6 +364,6 @@ export default function MobileNav() {
           </Alert> */}
         </Card>
       </Drawer>
-    </>
+    </div>
   );
 }
