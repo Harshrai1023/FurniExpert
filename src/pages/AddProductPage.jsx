@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Input,
+  Switch,
   Textarea,
   Typography,
 } from "@material-tailwind/react";
@@ -10,7 +11,7 @@ export const AddProductPage = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="grid md:grid-cols-8 ">
-        <div className="col-span-2 hidden md:block">
+        <div className="col-span-2 hidden md:block pt-9 pl-4">
           <Typography>Details</Typography>
           <Typography>Title, short description, image...</Typography>
         </div>
@@ -23,7 +24,7 @@ export const AddProductPage = () => {
             <ImageUpload />
           </div>
         </Card>
-        <div className="col-span-2 hidden md:block">
+        <div className="col-span-2 hidden md:block pt-9 pl-4">
           <Typography>Properties</Typography>
           <Typography>Additional functions and attributes...</Typography>
         </div>
@@ -33,10 +34,13 @@ export const AddProductPage = () => {
             <Input label="Quantity" />
             <Input label="Category" />
             <Textarea label="Specification" />
-            <Typography>Sale (Y/N)</Typography>
+            <div className="flex gap-2">
+              <Switch />
+              <Typography>Sale Label</Typography>
+            </div>
           </div>
         </Card>
-        <div className="col-span-2 hidden md:block">
+        <div className="col-span-2 hidden md:block pt-9 pl-4">
           <Typography>Pricing</Typography>
           <Typography>Price related inputs</Typography>
         </div>

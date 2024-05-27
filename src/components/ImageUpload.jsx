@@ -1,5 +1,6 @@
-import { XMarkIcon } from "@heroicons/react/24/solid";
-import { IconButton, Typography } from "@material-tailwind/react";
+import { CloudArrowUpIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Button, IconButton, Typography } from "@material-tailwind/react";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -10,20 +11,52 @@ function ImageUpload() {
       "image/*": [],
     },
     onDrop: (acceptedFiles) => {
+      // console.log(files);
       setFiles((prevFiles) =>
         prevFiles.concat(
-          acceptedFiles.map((file) =>
-            Object.assign(file, { preview: URL.createObjectURL(file) })
-          )
+          acceptedFiles
+            .filter(
+              (file) =>
+                !prevFiles.some((prevFile) => prevFile.name === file.name)
+            )
+            .map((file) =>
+              Object.assign(file, { preview: URL.createObjectURL(file) })
+            )
         )
       );
     },
+
   });
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const uploadImages = async (e) => {
+    e.preventDefault();
+    try {
+      const base64Files = await Promise.all(
+        files.map((file) => convertToBase64(file))
+      );
+      const result = await axios.post("http://localhost:5000/", {
+        images: base64Files,
+      });
+      console.log(result.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const removeFile = (fileName) => {
     setFiles(files.filter((file) => file.name !== fileName));
   };
-
+  const removeAll = () => {
+    setFiles([]);
+  };
   const thumbs = files.map((file) => (
     <div className="w-20 h-20 relative " key={file.name}>
       <img
@@ -67,7 +100,20 @@ function ImageUpload() {
           machine
         </Typography>
       </div>
-      <aside className="flex gap-2">{thumbs}</aside>
+      <aside className="flex flex-wrap gap-2 ">{thumbs}</aside>
+      <div
+        className={`flex mt-4 justify-end gap-2 ${
+          files.length === 0 ? "hidden" : "flex"
+        }`}
+      >
+        <Button onClick={removeAll}>Remove All</Button>
+        <Button
+          className="flex items-center justify-center gap-2"
+          onClick={uploadImages}
+        >
+          <CloudArrowUpIcon className="h-5 w-5" /> Upload
+        </Button>
+      </div>
     </section>
   );
 }
