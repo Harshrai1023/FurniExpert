@@ -64,21 +64,21 @@ export function CartDetails() {
                   const totalPrice = cartItem.price * quantity;
 
                   return (
-                    <tr key={cartItem.id}>
+                    <tr key={cartItem._id}>
                       <td className={classes}>
                         <div className="flex items-center gap-3">
                           <img
-                            src={cartItem.img}
+                            src={cartItem.img[0]}
                             alt={cartItem.name}
                             size="md"
-                            className="border w-12 h-12 rounded-lg  border-blue-gray-50 bg-blue-gray-50/50 object-contain "
+                            className="border w-28 h-28 rounded-lg  border-blue-gray-50 bg-blue-gray-50/50 object-contain p-2"
                           />
                           <Typography
                             variant="small"
                             color="blue-gray"
                             className="font-bold"
                           >
-                            {cartItem.name}
+                            {cartItem.title}
                           </Typography>
                         </div>
                       </td>
@@ -99,7 +99,7 @@ export function CartDetails() {
                             onClick={() =>
                               dispatch(
                                 handleQuantityChange({
-                                  id: cartItem.id,
+                                  _id: cartItem._id,
                                   op: "decrement",
                                 })
                               )
@@ -114,7 +114,7 @@ export function CartDetails() {
                             onClick={() =>
                               dispatch(
                                 handleQuantityChange({
-                                  id: cartItem.id,
+                                  _id: cartItem._id,
                                   op: "increment",
                                 })
                               )
@@ -139,7 +139,7 @@ export function CartDetails() {
                           <IconButton
                             className="rounded-full"
                             variant="text"
-                            onClick={() => dispatch(removeProduct(cartItem.id))}
+                            onClick={() => dispatch(removeProduct(cartItem._id))}
                           >
                             <TrashIcon className="h-4 w-4" />
                           </IconButton>

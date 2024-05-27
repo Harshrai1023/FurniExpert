@@ -14,7 +14,7 @@ import { addProduct } from "../redux/cartRedux";
 export const SingleProductDetails = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  const item = {
+  const product = {
     id: Date.now(),
     img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
     name: "Foundations Matte Flip Flop",
@@ -32,11 +32,11 @@ export const SingleProductDetails = () => {
       <Chip className="w-min" value="New" />
 
       {/* <Typography>IN STOCK</Typography> */}
-      <Typography>{item.name}</Typography>
+      <Typography>{product.name}</Typography>
 
       <div className="flex gap-2">
         <Rating
-          initialRating={item.rating}
+          initialRating={product.rating}
           readonly
           emptySymbol={
             <svg
@@ -71,12 +71,12 @@ export const SingleProductDetails = () => {
       </div>
 
       <div className=" flex gap-2">
-        <Typography>₹{item.price}</Typography>
+        <Typography>₹{product.price}</Typography>
         <Typography className="line-through text-gray-500">
-          ₹{item.price}
+          ₹{product.price}
         </Typography>
       </div>
-      <Typography>{item.desc}</Typography>
+      <Typography>{product.desc}</Typography>
       <div className="h-full" />
       <div className="flex justify-between">
         <Typography>Quantity</Typography>
@@ -103,7 +103,7 @@ export const SingleProductDetails = () => {
         <Button
           fullWidth
           className="flex items-center justify-center gap-2"
-          onClick={() => dispatch(addProduct(item))}
+          onClick={() => dispatch(addProduct(product))}
         >
           <ShoppingCartIcon className="h-5 w-5" /> Add to Cart
         </Button>

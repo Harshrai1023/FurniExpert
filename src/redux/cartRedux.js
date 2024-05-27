@@ -50,21 +50,21 @@ const cartSlice = createSlice({
 
     removeProduct: (state, action) => {
       const removedProduct = state.products.find(
-        (product) => product.id === action.payload
+        (product) => product._id === action.payload
       );
 
       if (removedProduct) {
         state.products = state.products.filter(
-          (product) => product.id !== action.payload
+          (product) => product._id !== action.payload
         );
         state.total -= removedProduct.price * removedProduct.quantity;
       }
     },
 
     handleQuantityChange: (state, action) => {
-      // Find the index of the item with the given id in the products array
+      // Find the index of the item with the given _id in the products array
       const itemIndex = state.products.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
 
       if (itemIndex >= 0) {
