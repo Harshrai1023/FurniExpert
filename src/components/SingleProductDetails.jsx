@@ -1,4 +1,5 @@
 import {
+  CubeTransparentIcon,
   CurrencyRupeeIcon,
   HeartIcon,
   MinusIcon,
@@ -10,7 +11,7 @@ import React, { useState } from "react";
 import Rating from "react-rating";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/cartRedux";
-
+import Modal from "./Modal";
 export const SingleProductDetails = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
@@ -26,6 +27,10 @@ export const SingleProductDetails = () => {
   const handleIncrement = () => setQuantity(quantity + 1);
   const handleDecrement = () =>
     setQuantity(quantity - 1 > 0 ? quantity - 1 : 1);
+  const [open, setOpen] = useState(false);
+  const modelViewer = () => {
+    console.log("3D View");
+  };
 
   return (
     <div className="flex flex-col gap-4 p-5">
@@ -114,11 +119,38 @@ export const SingleProductDetails = () => {
       <div className="flex justify-center">
         <Button
           variant="text"
-          className="w-min flex items-center gap-2 px-6 py-3"
+          className="flex items-center gap-2 px-6 py-3"
+          onClick={() => {
+            console.log("Favorite");
+          }}
         >
           <HeartIcon className="h-5 w-5" />
           Favorite
         </Button>
+        <Button
+          variant="text"
+          className="flex items-center gap-2 px-6 py-3"
+          onClick={() => setOpen(true)}
+        >
+          <CubeTransparentIcon className="h-5 w-5" />
+          View in 3D
+        </Button>
+
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <model-viewer
+            src="/assets/models/scene.gltf"
+            ar
+            ar-modes="webxr scene-viewer quick-look"
+            camera-controls
+            tone-mapping="neutral"
+            poster="poster.webp"
+            shadow-intensity="1"
+            auto-rotate
+            camera-orbit="69.12deg 79.18deg 377.8m"
+            field-of-view="30deg"
+            style = {{width: "100%", height: "100%"}}
+          ></model-viewer>
+        </Modal>
       </div>
     </div>
   );

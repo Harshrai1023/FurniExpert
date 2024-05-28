@@ -17,7 +17,7 @@ const ProductCarousel = ({ images }) => {
             >
                 {images?.map((img) => (
                     <img className="p-1"
-                        // key={img.id}
+                        key={img}
                         src={img}
                         // alt={img.attributes.name}
                     />

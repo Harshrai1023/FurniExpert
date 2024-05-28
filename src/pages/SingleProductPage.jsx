@@ -7,21 +7,22 @@ import { Typography } from "@material-tailwind/react";
 import React from "react";
 import ProductCarousel from "../components/ProductCarousel";
 import { SingleProductDetails } from "../components/SingleProductDetails";
-import { SingleProductImageGallery } from "../components/SingleProductImageGallery";
 export const SingleProductPage = () => {
   return (
     <div className="flex flex-col max-w-7xl mx-auto gap-5">
       {/* Product Image Gallery */}
       <div className="flex flex-col lg:flex-row gap-5 p-5">
         {/* <SingleProductImageGallery /> */}
-        <ProductCarousel images={[
-        "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-3D.webp",
-        "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-BACK.webp",
-        "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-FRONT.webp",
-        "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-LEFT.webp",
-        "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-RIGHT.webp",
-        "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-TOP.webp",
-      ]} />
+        <ProductCarousel
+          images={[
+            "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-3D.webp",
+            "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-BACK.webp",
+            "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-FRONT.webp",
+            "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-LEFT.webp",
+            "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-RIGHT.webp",
+            "/assets/webp/IKEA-Antnas_Table_And_4_Chairs-TOP.webp",
+          ]}
+        />
         {/* Product Details */}
         <SingleProductDetails />
       </div>
@@ -50,9 +51,8 @@ export const SingleProductPage = () => {
           </Typography>
         </div>
       </div>
-      
+
       {/* Product Specifications & Reviews */}
-      <ProductCarousel />
       {/* <div>Product Specifications & Reviews</div> */}
     </div>
   );
