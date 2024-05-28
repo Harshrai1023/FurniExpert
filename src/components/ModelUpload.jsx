@@ -4,10 +4,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-function ImageUpload() {
+function ModelUpload() {
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
+      
       "image/*": [],
     },
     onDrop: (acceptedFiles) => {
@@ -25,7 +26,6 @@ function ImageUpload() {
         )
       );
     },
-
   });
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -88,14 +88,12 @@ function ImageUpload() {
         })}
       >
         <input {...getInputProps()} />
-        <img
-          className="h-40"
-          src="/assets/images/upload.svg"
-          alt="upload-img"
-        />
-        <Typography className="h-6 font-bold">Drop or Select Images</Typography>
+        <img className="py-5" src="/assets/icon3d.svg" />
+        <Typography className="h-6 font-bold">
+          Drop or Select 3D Model
+        </Typography>
         <Typography>
-          Drop images here or click to{" "}
+          Drop 3D Model file here or click to{" "}
           <span className="underline text-red-400">browse</span> thorough your
           machine
         </Typography>
@@ -118,4 +116,4 @@ function ImageUpload() {
   );
 }
 
-export default ImageUpload;
+export default ModelUpload;
