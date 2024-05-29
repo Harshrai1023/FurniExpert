@@ -1,17 +1,15 @@
 import { CloudArrowUpIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Button, IconButton, Typography } from "@material-tailwind/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import { useDropzone } from "react-dropzone";
 
-function ImageUpload() {
-  const [files, setFiles] = useState([]);
+const ImageUpload = forwardRef(({ files, setFiles}, ref) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
     },
     onDrop: (acceptedFiles) => {
-      // console.log(files);
       setFiles((prevFiles) =>
         prevFiles.concat(
           acceptedFiles
@@ -25,8 +23,8 @@ function ImageUpload() {
         )
       );
     },
-
   });
+
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -36,8 +34,7 @@ function ImageUpload() {
     });
   };
 
-  const uploadImages = async (e) => {
-    e.preventDefault();
+  const uploadImages = async () => {
     try {
       const base64Files = await Promise.all(
         files.map((file) => convertToBase64(file))
@@ -45,18 +42,28 @@ function ImageUpload() {
       const result = await axios.post("http://localhost:5000/", {
         images: base64Files,
       });
-      console.log(result.data);
+      // setImageURL(result.data);  // Update imageURL after successful upload
+      console.log(result.data + " Image URL");
+      return result.data;  // Return result for clarity, although not strictly necessary
     } catch (err) {
       console.error(err);
+      return null;
     }
   };
+  
+
+  useImperativeHandle(ref, () => ({
+    uploadImages,
+  }));
 
   const removeFile = (fileName) => {
     setFiles(files.filter((file) => file.name !== fileName));
   };
+
   const removeAll = () => {
     setFiles([]);
   };
+
   const thumbs = files.map((file) => (
     <div className="w-20 h-20 relative " key={file.name}>
       <img
@@ -75,12 +82,11 @@ function ImageUpload() {
   ));
 
   useEffect(() => {
-    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
-  }, []);
+  }, [files]);
 
   return (
-    <section className="">
+    <section>
       <div
         {...getRootProps({
           className:
@@ -94,13 +100,13 @@ function ImageUpload() {
           alt="upload-img"
         />
         <Typography className="h-6 font-bold">Drop or Select Images</Typography>
-        <Typography>
+        <Typography className="text-center">
           Drop images here or click to{" "}
           <span className="underline text-red-400">browse</span> thorough your
           machine
         </Typography>
       </div>
-      <aside className="flex flex-wrap gap-2 ">{thumbs}</aside>
+      <aside className="flex flex-wrap gap-2">{thumbs}</aside>
       <div
         className={`flex mt-4 justify-end gap-2 ${
           files.length === 0 ? "hidden" : "flex"
@@ -116,6 +122,6 @@ function ImageUpload() {
       </div>
     </section>
   );
-}
+});
 
 export default ImageUpload;
